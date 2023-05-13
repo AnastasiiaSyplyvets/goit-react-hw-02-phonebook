@@ -5,7 +5,7 @@ import { Contact } from './ContactList';
 import { nanoid } from 'nanoid';
 import css from './ContactForm.module.css';
 
-const id = nanoid();
+// const id = nanoid();
 
 export class App extends Component {
   state = {
