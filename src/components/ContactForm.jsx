@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import css from './ContactForm.module.css';
 
 class Form extends Component {
   state = {
@@ -30,9 +31,10 @@ class Form extends Component {
   render() {
     return (
       <form onSubmit={this.handleFormSubmit}>
-        <label htmlFor="">
+        <label className={css.labelName} htmlFor="">
           Name
           <input
+            className={css.input}
             type="text"
             value={this.state.name}
             onChange={this.handleInputChange}
@@ -42,16 +44,19 @@ class Form extends Component {
             required
           />
         </label>
-        <label htmlFor="">
+        <label className={css.labelName} htmlFor="">
           Number
           <input
+            className={css.input}
             type="tel"
             value={this.state.number}
             name="number"
             onChange={this.handleInputChange}
           ></input>
         </label>
-        <button type="submit">Add contact</button>
+        <button className={css.addBtn} type="submit">
+          Add contact
+        </button>
       </form>
     );
   }

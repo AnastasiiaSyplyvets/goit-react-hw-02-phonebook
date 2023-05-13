@@ -3,6 +3,7 @@ import Form from './ContactForm';
 import { Filter } from './Filter';
 import { Contact } from './ContactList';
 import { nanoid } from 'nanoid';
+import css from './ContactForm.module.css';
 
 const id = nanoid();
 
@@ -22,7 +23,7 @@ export class App extends Component {
 
     const newContact = {
       ...data,
-      // id: nanoid(),
+      id: nanoid(),
     };
 
     if (this.state.contacts.find(contact => contact.name === data.name)) {
@@ -51,23 +52,34 @@ export class App extends Component {
     );
   };
 
+  handleDeleteBtn = id => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== id),
+    }));
+  };
+
   render() {
     const { filter } = this.state;
 
     const visibleContacts = this.filterContacts();
-    // console.log(this.state.contacts);
 
     return (
       <div>
-        <h1>Phonebook</h1>
+        <h1 className={css.mainTitle}>Phonebook</h1>
         <Form onSubmit={this.createContact} />
 
-        <h2>Contacts</h2>
+        <h2 className={css.subTitle}>Contacts</h2>
         <Filter onChange={this.changeFilter} filter={filter} />
-        <ul>
+        <ul className={css.listCover}>
           {visibleContacts.map(contact => {
             return (
-              <Contact key={id} name={contact.name} number={contact.number} />
+              <Contact
+                id={contact.id}
+                key={contact.id}
+                name={contact.name}
+                number={contact.number}
+                onChange={() => this.handleDeleteBtn(contact.id)}
+              />
             );
           })}
         </ul>
